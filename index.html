@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla Weather Forecast App | Amanda Machado</title>
+    <!-- Axios API -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/f17a491212.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- css -->
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <button class="unit-switch" id="unit-switch">˚F</button>
+        <form class="search-form" id="search-form">
+          <input
+            type="search"
+            name="searchcity"
+            class="search-input"
+            id="search-input"
+            placeholder="Search city..."
+          />
+          <input type="submit" value="Search" class="search-button" />
+        </form>
+        <button class="use-device-button" id="use-device-button">
+          <i class="fa-solid fa-location-dot"></i> Use device location
+        </button>
+      </header>
+      <main>
+        <div class="weather-today">
+          <h2><span id="today-temp"></span><span id="temp-unit"></span></h2>
+          <h1 id="city"></h1>
+
+          <div class="today-description" id="today-description"></div>
+          <div class="today-min-max">
+            <span class="max-temp" id="today-max-temp"></span>˚|
+            <span class="min-temp" id="today-min-temp"></span>˚
+          </div>
+          <div class="current-dayandtime">
+            Last updated: <span id="current-dayandtime"></span>
+          </div>
+          <div class="today-details">
+            <div class="today-feelslike">
+              Feels like: <span id="feelslike"></span>˚
+            </div>
+            <div class="today-humidity">
+              Humidity: <span id="humidity"></span>%
+            </div>
+            <div class="today-windspeed">
+              Wind speed: <span id="windspeed"></span> km/h
+            </div>
+          </div>
+        </div>
+        <div class="weather-image">
+          <img
+            src="https://www.gstatic.com/images/icons/material/apps/weather/2x/partly_cloudy_dark_color_96dp.png"
+            alt=""
+            id="today-icon"
+          />
+        </div>
+      </main>
+    </div>
+    <footer>
+      <small
+        ><a
+          href="https://github.com/amandaasmac/vanillaweather-app"
+          target="_blank"
+          >Open source code</a
+        >
+        by Amanda</small
+      >
+    </footer>
+    <script src="src/app.js"></script>
+  </body>
+</html>
