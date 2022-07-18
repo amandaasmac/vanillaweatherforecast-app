@@ -175,6 +175,37 @@ main img {
   text-align: right;
 }
 
+.daily-forecast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  /* border-top: 1px solid var(--light-cyan); */
+}
+
+.daily-forecast:hover {
+  background-color: #fab2ac1a;
+}
+
+.daily-forecast::before {
+  content: "";
+  height: 1px;
+  width: 70%;
+  position: absolute;
+  top: 0;
+  left: 15%;
+  background-color: var(--light-cyan);
+}
+
+.forecast-max-temp {
+  font-weight: 600;
+}
+
+.daily-forecast img {
+  height: 48px;
+}
+
 footer {
   text-align: center;
   color: var(--amaranth-pink);
