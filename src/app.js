@@ -21,29 +21,51 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  let day = days[date.getDay()];
+
+  return day;
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#weather-forecast");
 
-  let days = ["Thursday", "Friday", "Saturday", "Sunday"];
   let forecastHTML = ``;
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 8) {
+      forecastHTML =
+        forecastHTML +
+        `
       <div class="daily-forecast">
-        <div class="forecast-day">${day}</div>
+        <div class="forecast-day">${formatForecastDay(forecastDay.dt)}</div>
         <div>
-          <span class="forecast-max-temp">44˚</span>|
-          <span class="forecast-min-temp">24˚</span>
+          <span class="forecast-max-temp">${Math.round(
+            forecastDay.temp.max
+          )}˚</span>|
+          <span class="forecast-min-temp">${Math.round(
+            forecastDay.temp.min
+          )}˚</span>
         </div>
         <img
-          src="https://www.gstatic.com/images/icons/material/apps/weather/2x/partly_cloudy_dark_color_96dp.png"
-          alt=""
+          src="img/${forecastDay.weather[0].id}d.png"
+          alt="${forecastDay.weather[0].description}"
         />
       </div>
     `;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
