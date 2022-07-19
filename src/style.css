@@ -191,11 +191,15 @@ main img {
 .daily-forecast::before {
   content: "";
   height: 1px;
-  width: 70%;
+  width: 80%;
   position: absolute;
   top: 0;
-  left: 15%;
+  left: 10%;
   background-color: var(--light-cyan);
+}
+
+.forecast-day {
+  min-width: 80px;
 }
 
 .forecast-max-temp {

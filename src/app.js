@@ -21,6 +21,33 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+
+  let days = ["Thursday", "Friday", "Saturday", "Sunday"];
+  let forecastHTML = ``;
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="daily-forecast">
+        <div class="forecast-day">${day}</div>
+        <div>
+          <span class="forecast-max-temp">44˚</span>|
+          <span class="forecast-min-temp">24˚</span>
+        </div>
+        <img
+          src="https://www.gstatic.com/images/icons/material/apps/weather/2x/partly_cloudy_dark_color_96dp.png"
+          alt=""
+        />
+      </div>
+    `;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperature(response) {
   unitElement.innerHTML = "˚C";
   switchUnitElement.innerHTML = "˚F";
@@ -148,5 +175,7 @@ switchUnitElement.addEventListener("click", switchUnit);
 
 let locationButton = document.querySelector("#use-device-button");
 locationButton.addEventListener("click", getDevicePosition);
+
+displayForecast();
 
 searchCity("Rome");
