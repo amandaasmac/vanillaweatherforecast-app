@@ -21,7 +21,8 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#weather-forecast");
 
   let days = ["Thursday", "Friday", "Saturday", "Sunday"];
@@ -46,6 +47,11 @@ function displayForecast() {
   });
 
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=current,minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayTemperature(response) {
@@ -87,10 +93,11 @@ function displayTemperature(response) {
   let iconId = response.data.weather[0].id;
   iconElement.setAttribute("src", `img/${iconId}d.png`);
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
-  let apiKey = "f2a962d48c46d7fc23aca5910b2db6af";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
@@ -154,10 +161,11 @@ function getDevicePosition() {
 function usePosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let apiKey = "f2a962d48c46d7fc23aca5910b2db6af";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }
+
+let apiKey = "f2a962d48c46d7fc23aca5910b2db6af";
 
 let celsiusTemperature = null;
 let celsiusMaxTemperature = null;
@@ -175,7 +183,5 @@ switchUnitElement.addEventListener("click", switchUnit);
 
 let locationButton = document.querySelector("#use-device-button");
 locationButton.addEventListener("click", getDevicePosition);
-
-displayForecast();
 
 searchCity("Rome");
