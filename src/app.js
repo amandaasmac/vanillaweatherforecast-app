@@ -141,14 +141,12 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function calculateFahrenheitTemperature(celsiusTemp) {
-  return Math.round((celsiusTemp * 9) / 5 + 32);
-}
-
 function switchUnit(event) {
   event.preventDefault();
 
   let speedUnitElement = document.querySelector("#speed-unit");
+  let cityElement = document.querySelector("#city");
+  let currentCity = cityElement.innerHTML;
 
   switch (switchUnitElement.innerHTML) {
     case "˚F":
@@ -156,7 +154,7 @@ function switchUnit(event) {
       unitElement.innerHTML = "˚F";
       speedUnitElement.innerHTML = "mi/h";
       units = "imperial";
-      searchCity(city);
+      searchCity(currentCity);
 
       break;
     case "˚C":
@@ -164,7 +162,7 @@ function switchUnit(event) {
       unitElement.innerHTML = "˚C";
       speedUnitElement.innerHTML = "km/h";
       units = "metric";
-      searchCity(city);
+      searchCity(currentCity);
 
       break;
   }
@@ -177,6 +175,11 @@ function getDevicePosition() {
 function usePosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
+  if (unitElement.innerHTML === "˚C") {
+    units = "metric";
+  } else {
+    units = "imperial";
+  }
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayTemperature);
 }
